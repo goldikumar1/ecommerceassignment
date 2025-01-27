@@ -1,84 +1,82 @@
 import React, { useState } from "react";
-import "./Account.css"; // Import the CSS file
 
 const Account = () => {
-  const [account, setAccount] = useState({
+  const [accountDetails, setAccountDetails] = useState({
     name: "",
     email: "",
     address: "",
+    password: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAccount((prevAccount) => ({
-      ...prevAccount,
+    setAccountDetails((prevDetails) => ({
+      ...prevDetails,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Account details saved successfully!");
-    console.log("Account Details:", account);
+    alert("Account details updated!");
   };
 
   return (
-    <div className="account-container">
-      <h1 className="account-title">Account Management</h1>
-      <form onSubmit={handleSubmit} className="account-form">
-        {/* Name Input */}
-        <div className="form-group">
-          <label htmlFor="name" className="form-label">
-            Name:
-          </label>
+    <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+      <h1>Account Details</h1>
+      <form onSubmit={handleSubmit}>
+        <div style={{ margin: "10px 0" }}>
+          <label>Name:</label>
           <input
             type="text"
-            id="name"
             name="name"
-            value={account.name}
+            value={accountDetails.name}
             onChange={handleChange}
             placeholder="Enter your name"
             required
-            className="form-input"
+            style={{ padding: "5px", width: "100%" }}
           />
         </div>
 
-        {/* Email Input */}
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">
-            Email:
-          </label>
+        <div style={{ margin: "10px 0" }}>
+          <label>Email:</label>
           <input
             type="email"
-            id="email"
             name="email"
-            value={account.email}
+            value={accountDetails.email}
             onChange={handleChange}
             placeholder="Enter your email"
             required
-            className="form-input"
+            style={{ padding: "5px", width: "100%" }}
           />
         </div>
 
-        {/* Address Input */}
-        <div className="form-group">
-          <label htmlFor="address" className="form-label">
-            Shipping Address:
-          </label>
+        <div style={{ margin: "10px 0" }}>
+          <label>Shipping Address:</label>
           <textarea
-            id="address"
             name="address"
-            value={account.address}
+            value={accountDetails.address}
             onChange={handleChange}
             placeholder="Enter your shipping address"
             required
-            className="form-textarea"
+            style={{ padding: "5px", width: "100%", height: "100px" }}
           ></textarea>
         </div>
 
-        {/* Submit Button */}
-        <button type="submit" className="form-button">
-          Save Account
+        <div style={{ margin: "10px 0" }}>
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={accountDetails.password}
+            onChange={handleChange}
+            placeholder="Enter a new password"
+            style={{ padding: "5px", width: "100%" }}
+          />
+        </div>
+
+        <button type="submit" style={{ padding: "10px 20px" }}>
+          Update Account
         </button>
       </form>
     </div>

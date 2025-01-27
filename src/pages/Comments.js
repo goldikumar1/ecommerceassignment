@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 
-const Comments = () => {
+const Comments = ({ user }) => {
   const [comments, setComments] = useState([
     {
       id: 1,
-      name: "John Doe",
-      product: "Product 1",
+      name: "Jimin Park",
+      product: "Apple",
       rating: 5,
       comment: "Great product!",
+      image: null,
     },
     {
       id: 2,
-      name: "Jane Smith",
-      product: "Product 2",
+      name: "Jungkook",
+      product: "Mangoes",
       rating: 4,
       comment: "Very useful, but a bit expensive.",
+      image: null,
     },
   ]);
 
   const [newComment, setNewComment] = useState({
-    name: "",
+    name: user || "Anonymous",
     product: "",
     rating: "",
     comment: "",
+    image: null,
   });
 
   const handleChange = (e) => {
@@ -30,6 +33,13 @@ const Comments = () => {
     setNewComment((prevComment) => ({
       ...prevComment,
       [name]: value,
+    }));
+  };
+
+  const handleImageChange = (e) => {
+    setNewComment((prevComment) => ({
+      ...prevComment,
+      image: URL.createObjectURL(e.target.files[0]),
     }));
   };
 
@@ -43,10 +53,11 @@ const Comments = () => {
       ]);
 
       setNewComment({
-        name: "",
+        name: user || "Anonymous",
         product: "",
         rating: "",
         comment: "",
+        image: null,
       });
 
       alert("Comment added successfully!");
@@ -114,44 +125,32 @@ const Comments = () => {
           ></textarea>
         </div>
 
-        <button
-          type="submit"
-          style={{
-            backgroundColor: "blue",
-            color: "white",
-            padding: "10px",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Add Comment
+        <div style={{ margin: "10px 0" }}>
+          <label>Upload Image:</label>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            accept="image/*"
+            style={{ padding: "5px" }}
+          />
+        </div>
+
+        <button type="submit" style={{ padding: "10px 20px" }}>
+          Submit Comment
         </button>
       </form>
 
       {/* Display Comments */}
-      <h2>Customer Reviews</h2>
-      {comments.length === 0 ? (
-        <p>No reviews yet. Be the first to leave a comment!</p>
-      ) : (
-        comments.map((c) => (
-          <div
-            key={c.id}
-            style={{
-              border: "1px solid #ccc",
-              margin: "10px 0",
-              padding: "10px",
-              borderRadius: "5px",
-            }}
-          >
-            <h3>{c.product}</h3>
-            <p>
-              <strong>{c.name}</strong> rated it {c.rating}/5
-            </p>
-            <p>{c.comment}</p>
+      <div>
+        {comments.map((comment) => (
+          <div key={comment.id} style={{ marginBottom: "20px", padding: "10px", border: "1px solid #ccc" }}>
+            <h3>{comment.name} (Rating: {comment.rating})</h3>
+            <p><strong>Product:</strong> {comment.product}</p>
+            <p>{comment.comment}</p>
+            {comment.image && <img src={comment.image} alt="uploaded" style={{ maxWidth: "100%" }} />}
           </div>
-        ))
-      )}
+        ))}
+      </div>
     </div>
   );
 };

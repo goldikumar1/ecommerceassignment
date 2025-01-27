@@ -1,54 +1,146 @@
 header {
-  background-color: #4caf50; /* Primary green color */
-  color: white;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #126614; /* A slightly softer green for better contrast */
+  color: #fff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between; /* Align title, nav, and login/logout */
+  align-items: center;
+  position: sticky; /* Make header sticky */
+  top: 0;
+  z-index: 1000;
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem; /* Slightly smaller for better responsiveness */
   font-family: 'Arial', sans-serif;
 }
 
 nav {
-  margin-top: 15px;
+  display: flex;
+  gap: 15px; /* Use gap for even spacing */
 }
 
 nav a {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  font-size: 1.2rem;
-  margin: 0 15px;
-  padding: 8px 12px;
-  border-radius: 4px;
+  font-size: 1rem;
+  padding: 6px 10px;
+  border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav a:hover {
-  background-color: #388e3c; /* Darker green for hover */
-  color: #f0f0f0; /* Light hover text */
+  background-color: #1e7d2b; /* Slightly darker green for hover */
+  color: #e0e0e0; /* Light text for hover */
 }
 
-nav a:last-child {
-  margin-right: 0;
+nav a.active {
+  font-weight: bold; /* Highlight the active link */
+  border-bottom: 2px solid #fff; /* Add an underline for the active link */
 }
 
-@media (max-width: 600px) {
+.login-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-logout button {
+  color: #fff;
+  background-color: #1e7d2b; /* A darker green for the button */
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-logout button:hover {
+  background-color: #155a21; /* Darker green for hover */
+  transform: scale(1.05); /* Subtle scale effect */
+}
+
+span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   nav {
-    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 10px;
+    gap: 10px;
   }
 
   nav a {
-    margin: 5px;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    padding: 5px 8px;
+  }
+}
+/* UserStatus.css */
+
+/* Container for the user greeting and login/logout button */
+.user-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Styling for the welcome message */
+.user-status span {
+  font-size: 18px;
+  margin-right: 10px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Style for the logout button */
+.user-status button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+/* Style for the login button */
+.user-status button:hover {
+  background-color: #0056b3;
+}
+
+/* Style for the login button when shown in the absence of a user */
+.user-status button:focus {
+  outline: none;
+}
+
+.user-status button:active {
+  background-color: #004085;
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column; /* Stack items on smaller screens */
+    text-align: center;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  .login-logout {
+    margin-top: 10px;
   }
 }

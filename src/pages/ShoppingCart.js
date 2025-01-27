@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./ShoppingCart.css"; // Import CSS for styling
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ user }) => {
   const [cartItems, setCartItems] = useState([
-    { id: 1, name: "Product 1", price: 10, quantity: 1 },
-    { id: 2, name: "Product 2", price: 20, quantity: 2 },
+    { id: 1, name: "Apple", price: 10, quantity: 1 },
+    { id: 2, name: "Mangoes", price: 20, quantity: 2 },
   ]);
 
   const handleQuantityChange = (id, newQuantity) => {
@@ -25,6 +25,14 @@ const ShoppingCart = () => {
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+  const handleFinalizePurchase = () => {
+    if (user) {
+      alert(`Thank you for your purchase, ${user}!`);
+    } else {
+      alert("You need to log in to finalize the purchase.");
+    }
   };
 
   return (
@@ -58,7 +66,7 @@ const ShoppingCart = () => {
           <h3 className="grand-total">Grand Total: ${calculateTotal()}</h3>
           <button
             className="finalize-button"
-            onClick={() => alert("Purchase finalized!")}
+            onClick={handleFinalizePurchase}
           >
             Finalize Purchase
           </button>
